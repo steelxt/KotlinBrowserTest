@@ -11,7 +11,7 @@ val react_router_dom_version = "4.3.1-pre.83-kotlin-$kotlin_version"
 
 plugins {
     kotlin("js") version "1.3.50"
-    id("kotlin-dce-js") version "1.3.50"
+   // id("kotlin-dce-js") version "1.3.50"
    // id("kotlinx-serialization") version "1.3.50"
     idea
 }
@@ -40,27 +40,24 @@ kotlin{
                     moduleKind = "commonjs"
                     sourceMapEmbedSources = "always"
                     main="call"
-                    outputFile = "${project.buildDir.path}/js/${project.name}.js"
+                   // outputFile = "${project.buildDir.path}/js/${project.name}.js"
                 }
             }
 
             webpackTask {
                 runTask {
-                    println("$projectDir/src/main/resources")
+                    println("content dir $projectDir/src/main/resources")
                     devServer = devServer?.copy(
                         port = 3000,
-                       // proxy =  mapOf("/dashboard" to  "http://0.0.0.0:8080"),
+
+                        proxy =  mapOf("/" to  "http://0.0.0.0:8080"),
                         contentBase = listOf("$projectDir/src/main/resources")
-
-
                     )
-
-
                 }
 
-                archiveFileName = "frontbrowser.js"
+                archiveFileName = "BrowserTest-FrontBrowser.js"
                 report = true
-                saveEvaluatedConfigFile = true
+               saveEvaluatedConfigFile = true
                 sourceMaps = true
             }
         }
@@ -80,6 +77,15 @@ kotlin{
         implementation(npm("react"))
         implementation(npm("react-dom"))
         implementation(npm("react-router-dom"))
+        implementation(npm("react-toastify"))
+        implementation(npm("vertx3-eventbus-client", "3.7.1"))
+
+        implementation(npm("chart.js"))
+        implementation(npm("react-chartjs-2"))
+        implementation(npm("react-modal", "3.8"))
+        implementation(npm("sass-loader"))
+        implementation(npm("node-sass"))
+
     }
 
 
