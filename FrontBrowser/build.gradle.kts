@@ -16,6 +16,7 @@ plugins {
     idea
 }
 
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenLocal()
@@ -50,12 +51,12 @@ kotlin{
                     devServer = devServer?.copy(
                         port = 3000,
 
-                        proxy =  mapOf("/" to  "http://0.0.0.0:8080"),
-                        contentBase = listOf("$projectDir/src/main/resources")
+                        proxy =  mapOf("/api" to  "http://0.0.0.0:8080")
+//                        contentBase = listOf("$projectDir/src/main/resources")
                     )
                 }
 
-                archiveFileName = "BrowserTest-FrontBrowser.js"
+//                archiveFileName = "BrowserTest-FrontBrowser.js"
                 report = true
                saveEvaluatedConfigFile = true
                 sourceMaps = true
